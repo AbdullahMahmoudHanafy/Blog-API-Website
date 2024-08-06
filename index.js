@@ -49,7 +49,7 @@ app.get("/posts/:id", (req, res) => {
 })
 
 app.post("/posts", (req, res) => {
-  const newItem = {
+  const post = {
     id: posts.length + 1,
     title: req.body.title,
     content: req.body.content,
@@ -57,9 +57,9 @@ app.post("/posts", (req, res) => {
     date: new Date()
   }
 
-  posts.push(newItem);
+  posts.push(post);
 
-  res.sendStatus(202);
+  res.sendStatus(201).json(post);
 })
 
 app.patch("/posts/:id", (req, res) => {
@@ -69,7 +69,7 @@ app.patch("/posts/:id", (req, res) => {
   posts[itemId].content = req.body.content
   posts[itemId].author = req.body.author
 
-  res.sendStatus(202);
+  res.json(posts[itemId]);
 })
 
 app.delete("/posts/:id", (req, res) => {
@@ -81,7 +81,7 @@ app.delete("/posts/:id", (req, res) => {
     posts[i].id = i + 1;
   }
 
-  res.sendStatus(202);
+  res.json({ message: "Post deleted"});
 })
 
 app.listen(port, () => {
