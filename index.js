@@ -42,6 +42,12 @@ app.get("/posts", (req, res) => {
   res.send(posts);
 })
 
+app.get("/posts/:id", (req, res) => {
+  const itemId = req.params.id;
+
+  res.send(posts[itemId]);
+})
+
 app.post("/posts", (req, res) => {
   const newItem = {
     id: posts.length + 1,
