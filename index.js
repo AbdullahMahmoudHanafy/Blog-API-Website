@@ -62,6 +62,20 @@ app.post("/posts", (req, res) => {
   res.sendStatus(202);
 })
 
+app.patch("/posts/:id", (req, res) => {
+  const itemId = req.params.id;
+
+  posts[itemId].title = req.body.title
+  posts[itemId].content = req.body.content
+  posts[itemId].author = req.body.author
+
+  res.sendStatus(202);
+})
+
+//CHALLENGE 4: PATCH a post when you just want to update one parameter
+
+//CHALLENGE 5: DELETE a specific post by providing the post id.
+
 app.listen(port, () => {
   console.log(`API is running at http://localhost:${port}`);
 });
