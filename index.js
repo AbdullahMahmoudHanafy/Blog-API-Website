@@ -38,19 +38,23 @@ let lastId = 3;
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 
-//CHALLENGE 1: GET All posts
-
 app.get("/posts", (req, res) => {
   res.send(posts);
 })
 
-//CHALLENGE 2: GET a specific post by id
+app.post("/posts", (req, res) => {
+  const newItem = {
+    id: posts.length + 1,
+    title: req.body.title,
+    content: req.body.content,
+    author: req.body.author,
+    date: new Date()
+  }
 
-//CHALLENGE 3: POST a new post
+  posts.push(newItem);
 
-//CHALLENGE 4: PATCH a post when you just want to update one parameter
-
-//CHALLENGE 5: DELETE a specific post by providing the post id.
+  res.sendStatus(202);
+})
 
 app.listen(port, () => {
   console.log(`API is running at http://localhost:${port}`);
